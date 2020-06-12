@@ -1,0 +1,63 @@
+{% extends "layout_dt.html" %}
+{% block title %}
+Films
+{% endblock %}
+{% block content %}
+<div id="page">
+    <div id="content">
+        <div id="header">
+            <h1>Films</h1>
+        </div>
+
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Actors</th>
+                    <th>Length</th>
+                    <th>Rating</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Actors</th>
+                    <th>Length</th>
+                    <th>Rating</th>
+                    <th>Price</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "/api/films",
+                type: "POST",
+                data: function (args) {
+                    return { "args": JSON.stringify(args) };
+                }
+            },
+            "columns": [
+                { data: 'title' },
+                { data: 'category' },
+                { data: 'description' },
+                { data: 'actors' },
+                { data: 'length', searchable: false },
+                { data: 'rating', searchable: false },
+                { data: 'price', searchable: false }
+            ]
+        });
+    });
+</script>
+{% endblock %}
