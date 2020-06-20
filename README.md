@@ -2,6 +2,10 @@
 
 Sample Python
 
+## Demo
+
+http://35.215.111.93:5001/
+
 ## Preparing database
 
 Download sample data from https://www.postgresqltutorial.com/postgresql-sample-database/
@@ -27,7 +31,3 @@ Download sample data from https://www.postgresqltutorial.com/postgresql-sample-d
 ```
 
 Goto http://localhost:5001/
-
-## Demo
-
-http://35.215.111.93:5001/
