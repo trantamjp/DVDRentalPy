@@ -12,6 +12,10 @@
 </head>
 
 <body>
+    <h3>
+        See other demos:&nbsp;&nbsp;<a class="perldemo" href="">Perl Demo</a>,
+        &nbsp;<a class="nodejsdemo" href="">NodeJS Demo</a>
+    </h3>
     <div class="navbar">
         <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
         <a href="{{ url_for('customers') }}" class="navbar-item">Customers</a>
@@ -27,5 +31,10 @@
         </footer>
     </div>
 </body>
+<script>
+    $('.perldemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5000');
+    $('.pythondemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5001');
+    $('.nodejsdemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5002');
+</script>
 
 </html>

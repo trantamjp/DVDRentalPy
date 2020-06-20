@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/site.css')}}" />
+
+    <script src="//code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <body>
@@ -19,9 +21,20 @@
         {% endblock %}
         <hr />
         <footer>
+            <div class="navbar">
+                <div class="navbar-brand">Other demos:</div>
+            </div>
+            <h3><a class="perldemo" href="">Perl Demo</a><br><a class="nodejsdemo" href="">NodeJS Demo</a></h3>
             <p>Tam Tran</p>
         </footer>
     </div>
 </body>
+<script>
+
+    $('.perldemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5000');
+    $('.pythondemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5001');
+    $('.nodejsdemo').attr('href', $(location).attr('protocol') + '//' + $(location).attr('hostname') + ':5002');
+
+</script>
 
 </html>
