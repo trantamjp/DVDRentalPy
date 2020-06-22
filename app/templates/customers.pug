@@ -1,0 +1,116 @@
+extends layout_dt
+
+block title
+    | #{title}
+
+block content
+    #content
+        #header
+            h1 Customers
+        table#example.display(style='width:100%')
+            thead
+                tr
+                    th First Name
+                    th Last Name
+                    th Address
+                    th City
+                    th Zip Code
+                    th Country
+                    th Phone
+                    th Active
+            thead
+                tr
+                    td
+                        input(type=text class='firstname_search' data-name="first_name" placeholder="Search first name")
+                    td
+                        input(type=text class='lastname_search' data-name="last_name" placeholder="Search last name")
+                    td
+                        input(type=text class='address_search' data-name="address" placeholder="Search address")
+                    td
+                        input(type=text class='city_search' data-name="city" placeholder="Search city")
+                    td
+                        input(type=text class='postalcode_search' data-name="postal_code" placeholder="Search zip code")
+                    td
+                        select(class='country_search' data-name="country")
+                            option(value='') Any
+                    td
+                        input(type=text class='phone_search' data-name="phone" placeholder="Search phone")
+                    td
+                        select(class='activebool_search' data-name="activebool")
+                            option(value='') Any
+                            option(value='1') Active
+                            option(value='0') Not active
+            tfoot
+                tr
+                    th First Name
+                    th Last Name
+                    th Address
+                    th City
+                    th Zip Code
+                    th Country
+                    th Phone
+                    th Active
+    script.
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "#{ url_for('api_countries') }",
+                success: function (data) {
+                    var select = $('.country_search');
+                    $.each(data, function (i, d) {
+                        select.append('<option value="' + d.country_id + '">' + d.country + '</option>');
+                    });
+                }
+            });
+
+            $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "testdata": "#{title}",
+                "ajax": {
+                    url: "#{ url_for('api_datatable_customers') }",
+                    type: "POST",
+                    data: function (args) {
+                        return { "args": JSON.stringify(args) };
+                    }
+                },
+                "columns": [
+                    { name: 'first_name', data: 'first_name' },
+                    { name: 'last_name', data: 'last_name' },
+                    {
+                        name: 'address', data: function (row, type, val, meta) {
+                            var address = row.address;
+                            return [address.address, address.address2].filter(a => !!a).join(' ');
+                        }
+                    },
+                    { name: 'city', data: 'address.city.city' },
+                    { name: 'postal_code', data: 'address.postal_code' },
+                    { name: 'country', data: 'address.city.country.country' },
+                    { name: 'phone', data: 'address.phone' },
+                    {
+                        name: 'activebool', data: function (row, type, val, meta) {
+                            return row.activebool ? 'active' : 'not active';
+                        }
+                    }
+                ],
+                initComplete: function () {
+                    var api = this.api();
+                    $('.country_search, .activebool_search').on('change', function () {
+                        var name = $(this).data().name;
+                        var col = api.column(name + ':name');
+                        if (col.search() !== this.value) {
+                            col.search(this.value).draw();
+                        }
+                    });
+                    $('.firstname_search, .lastname_search, .address_search, .city_search, .postalcode_search, .phone_search').on('keyup change clear', function () {
+                        var name = $(this).data().name;
+                        var col = api.column(name + ':name');
+                        if (col.search() !== this.value) {
+                            col.search(this.value).draw();
+                        }
+                    });
+
+                }
+            });
+        });

@@ -1,0 +1,131 @@
+extends layout_dt
+
+block title
+    | #{title}
+
+block content
+    #content
+        #header
+            h1 Films
+
+        table#example.display(style='width:100%')
+            thead
+                tr
+                    th Title
+                    th Category
+                    th Description
+                    th Actors
+                    th Length
+                    th Rating
+                    th Lang
+                    th Price
+            thead
+                tr
+                    td
+                        input(type=text class='title_search' data-name="title" placeholder="Search title")
+                    td
+                        select(class='category_search' data-name="categories")
+                            option(value='') Any
+                    td
+                        input(type=text class='description_search' data-name="description" placeholder="Search description")
+                    td
+                        input(type=text class='actors_search' data-name="actors" placeholder="Search actors")
+                    td
+                        input(type=text class='length_search' data-name="length" placeholder="Search length")
+                    td
+                        select(class='rating_search' data-name="rating")
+                            option(value='') Any
+                            option(value='G') G
+                            option(value='NC-17') NC-17
+                            option(value='PG-13') PG-13
+                            option(value='PG') PG
+                            option(value='R') R
+                    td
+                        select(class='language_search' data-name="language")
+                            option(value='') Any
+                    td
+                        input(type=text class='rental_rate_search' data-name="rental_rate" placeholder="Search price")
+            tfoot
+                tr
+                    th Title
+                    th Category
+                    th Description
+                    th Actors
+                    th Length
+                    th Rating
+                    th Lang
+                    th Price
+    script.
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "#{ url_for('api_categories') }",
+                success: function (data) {
+                    var select = $('.category_search');
+                    $.each(data, function (i, d) {
+                        select.append('<option value="' + d.category_id + '">' + d.name + '</option>');
+                    });
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "#{ url_for('api_languages') }",
+                success: function (data) {
+                    var select = $('.language_search');
+                    $.each(data, function (i, d) {
+                        select.append('<option value="' + d.language_id + '">' + d.name + '</option>');
+                    });
+                }
+            });
+
+            $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "dom": "lrtip",
+                "ajax": {
+                    url: "#{ url_for('api_datatable_films') }",
+                    type: "POST",
+                    data: function (args) {
+                        return { "args": JSON.stringify(args) };
+                    }
+                },
+                "columns": [
+                    { name: 'title', data: 'title' },
+                    { name: 'categories', 'orderable': false,
+                        data: function (row, type, val, meta) {
+                            return row.categories.map(cat => cat.name).join(', ');
+                        }
+                    },
+                    { name: 'description', data: 'description'},
+                    { name: 'actors', 'orderable': false,
+                        data: function (row, type, val, meta) {
+                            return row.actors.map(actor => actor.first_name + ' ' + actor.last_name).join(', ');
+                        }
+                    },
+                    { name: 'length', data: 'length' },
+                    { name: 'rating', data: 'rating' },
+                    { name: 'language', data: 'language.name' },
+                    { name: 'rental_rate', data: 'rental_rate' }
+                ],
+                initComplete: function () {
+                    var api = this.api();
+                    $('.category_search, .rating_search, .language_search').on('change', function () {
+                        var name = $(this).data().name;
+                        var col = api.column(name + ':name');
+                        if (col.search() !== this.value) {
+                            col.search(this.value).draw();
+                        }
+                    });
+                    $('.title_search, .description_search, .actors_search, .length_search, .rental_rate_search').on('keyup change clear', function () {
+                        var name = $(this).data().name;
+                        var col = api.column(name + ':name');
+                        if (col.search() !== this.value) {
+                            col.search(this.value).draw();
+                        }
+                    });
+                },
+
+            });
+        });
