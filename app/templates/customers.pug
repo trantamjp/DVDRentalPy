@@ -67,7 +67,7 @@ block content
             $('#example').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "testdata": "#{title}",
+                "dom": "lrtip",
                 "ajax": {
                     url: "#{ url_for('api_datatable_customers') }",
                     type: "POST",
