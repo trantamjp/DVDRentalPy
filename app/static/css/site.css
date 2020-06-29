@@ -1,63 +1,58 @@
 .navbar {
-    background-color: lightslategray;
-    font-size: 1em;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-    color: white;
-    padding: 8px 5px 8px 5px;
-    margin-left: 175px;
+  background-color: lightslategray;
+  font-size: 1em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  padding: 8px 5px 8px 5px;
+  /* margin-left: 175px; */
 }
 
 .navbar a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .navbar-brand {
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-.navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
+  font-weight: 600;
+  margin-right: 30px;
 }
 
 .body-content {
-    padding: 5px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 175px;
-    background-color: white;
+  padding: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
 }
 
 #sidebar {
-    float: left;
-    width: 175px;
+  float: left;
+  width: 175px;
 }
 
 #sidebar ul {
-    margin-left: 0;
-    padding-left: 0;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 #sidebar ul h3 {
-    margin-top: 25px;
-    font-size: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+  margin-top: 25px;
+  font-size: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 #sidebar li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 #sidebar ul.links li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 #page {
-    background-color: #ddd;
-    margin: auto;
-    margin-left: auto;
-    padding-left: 0px;
-    margin-right: auto;
+  background-color: #ddd;
+  margin: auto;
+  margin-left: auto;
+  padding-left: 0px;
+  margin-right: auto;
 }

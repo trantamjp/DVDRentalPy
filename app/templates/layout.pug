@@ -1,37 +1,22 @@
-doctype html
-html
-    head
-        meta(charset='utf-8')
-        title
-            block title
-        link(rel='stylesheet' type='text/css' href="#{ url_for('static', filename='css/site.css')}")
-        script(src='//code.jquery.com/jquery-3.5.1.js')
-    body
-        #page
-            #sidebar
-                ul#sidebar-items
-                li
-                    h3 Links
-                    ul.links
-                    li
-                        a.perldemo(href) Perl Demo
-                    li
-                        a.pythondemo(href) Python Demo
-                    li
-                        a.nodejsdemo(href) NodeJS Demo
-            .navbar
-                a.navbar-brand(href="#{ url_for('home') }") DVDRentalPy
-                a.navbar-item(href="#{ url_for('customers') }") Customers
-                a.navbar-item(href="#{ url_for('films') }") Films
-            .body-content
-                block content
-                hr
-                footer
-                    p Tam Tran
-        script.
-            $(document).ready(function () {
-                var url_base = $(location).attr('protocol') + '//' + $(location).attr('hostname');
-                $('.perldemo').attr('href', url_base + ':5000');
-                $('.pythondemo').attr('href', url_base + ':5001');
-                $('.nodejsdemo').attr('href', url_base + ':5002');
-            });
+
+#page
+    #sidebar
+        ul#sidebar-items
+        li
+            h3 Links
+            ul.links
+            li
+                a.perldemo(href) Perl Demo
+            li
+                a.pythondemo(href) Python Demo
+            li
+                a.nodejsdemo(href) NodeJS Demo
+    .navbar
+        a.navbar-brand(href="#{ url_for('home') }") DVDRentalPy
+        a.navbar-item(href="#{ url_for('customers') }") Customers
+        a.navbar-item(href="#{ url_for('films') }") Films
+    .body-content
+        block content
+        hr
+        footer
+            p Tam Tran

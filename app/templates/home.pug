@@ -1,38 +1,29 @@
-extends layout
+extends layout_dt
 
 block title
-    | Home
+    | #{title}
 
 block content
     #getting-started
-        h1 Python Samples
-        span
-            | Github 
-            a(href='https://github.com/trantamjp/DVDRentalPy') https://github.com/trantamjp/DVDRentalPy
+        h2 Github
+        a(href='https://github.com/trantamjp/DVDRentalPy' target="_blank") https://github.com/trantamjp/DVDRentalPy
         h2 Sample Data
-        h3
+        h4
             | Download from here 
-            a(href='https://www.postgresqltutorial.com/postgresql-sample-database/') https://www.postgresqltutorial.com/postgresql-sample-database/
+            a(href='https://www.postgresqltutorial.com/postgresql-sample-database/' target="_blank") https://www.postgresqltutorial.com/postgresql-sample-database/
+        p Please click the link from the top menu
         ol
             li
                 p
                     | Customers List
-                    br
-                    a(href="#{ url_for('customers', _external=True) }") #{ url_for('customers', _external=True) }
                 p
-                    | DataTable with server-side processing.
-                    br
-                    |  The API is 
-                    a(href="#{ url_for('api_datatable_customers', _external=True) }" target='_blank') #{ url_for('api_datatable_customers', _external=True) }
-                    | . Without the query parameters, the API returns only the first 10 rows.
+                    | DataTable with server-side processing, pulling customer data from the API 
+                    a(href="/api/datatable/customers" target='_blank') here
+                    |  (showing first 10 rows without parameters).
             li
                 p
                     | Films List
-                    br
-                    a(href="#{ url_for('films', _external=True) }") #{ url_for('films', _external=True) }
                 p
-                    | DataTable with server-side processing.
-                    br
-                    |  The API is 
-                    a(href="#{ url_for('api_datatable_films', _external=True) }" target='_blank') #{ url_for('api_datatable_films', _external=True) }
-                    | . Without the query parameters, the API returns only the first 10 rows.
+                    | DataTable with server-side processing, pulling customer data from the API 
+                    a(href="/api/datatable/films" target='_blank') here
+                    |  (showing first 10 rows without parameters).

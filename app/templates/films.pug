@@ -61,6 +61,7 @@ block content
             $.ajax({
                 type: "GET",
                 url: "#{ url_for('api_categories') }",
+                contentType: "application/json",
                 success: function (data) {
                     var select = $('.category_search');
                     $.each(data, function (i, d) {
@@ -72,6 +73,7 @@ block content
             $.ajax({
                 type: "GET",
                 url: "#{ url_for('api_languages') }",
+                contentType: "application/json",
                 success: function (data) {
                     var select = $('.language_search');
                     $.each(data, function (i, d) {
@@ -87,19 +89,22 @@ block content
                 "ajax": {
                     url: "#{ url_for('api_datatable_films') }",
                     type: "POST",
+                    contentType: "application/json",
                     data: function (args) {
-                        return { "args": JSON.stringify(args) };
+                        return JSON.stringify(args);
                     }
                 },
                 "columns": [
                     { name: 'title', data: 'title' },
-                    { name: 'categories', 'orderable': false,
+                    {
+                        name: 'categories', 'orderable': false,
                         data: function (row, type, val, meta) {
                             return row.categories.map(cat => cat.name).join(', ');
                         }
                     },
-                    { name: 'description', data: 'description'},
-                    { name: 'actors', 'orderable': false,
+                    { name: 'description', data: 'description' },
+                    {
+                        name: 'actors', 'orderable': false,
                         data: function (row, type, val, meta) {
                             return row.actors.map(actor => actor.first_name + ' ' + actor.last_name).join(', ');
                         }

@@ -6,11 +6,7 @@ from app.model_factory import ModelFactory
 
 
 def datatable_search():
-    args = request.values.get("args")
-    if args:
-        args = json.loads(args)
-    else:
-        args = {}
+    args = request.json if request.is_json else {}
 
     data = ModelFactory.customer.datatable_search(args)
 

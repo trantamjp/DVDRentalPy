@@ -71,8 +71,9 @@ block content
                 "ajax": {
                     url: "#{ url_for('api_datatable_customers') }",
                     type: "POST",
+                    contentType: "application/json",
                     data: function (args) {
-                        return { "args": JSON.stringify(args) };
+                        return JSON.stringify(args);
                     }
                 },
                 "columns": [

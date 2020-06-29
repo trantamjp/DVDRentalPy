@@ -1,7 +1,15 @@
-from flask import render_template
+from urllib.parse import urlparse
+
+from flask import redirect, render_template, request
 
 from app import app
 from app.controllers import category, country, customer, film, language
+
+
+@app.route("/")
+def index():
+    base_url = urlparse(request.base_url)
+    return redirect(base_url.scheme + '://' + base_url.hostname)
 
 
 @app.route("/api/countries")
@@ -39,6 +47,6 @@ def films():
     return render_template("films.pug", title='Films')
 
 
-@app.route("/")
+@app.route("/home")
 def home():
     return render_template("home.pug")
