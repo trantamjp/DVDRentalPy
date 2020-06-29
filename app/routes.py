@@ -8,8 +8,7 @@ from app.controllers import category, country, customer, film, language
 
 @app.route("/")
 def index():
-    base_url = urlparse(request.base_url)
-    return redirect(base_url.scheme + '://' + base_url.hostname)
+    return redirect('/home')
 
 
 @app.route("/api/countries")
