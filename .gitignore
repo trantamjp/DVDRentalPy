@@ -146,3 +146,5 @@ node_modules/prettier/parser-yaml.js
 node_modules/prettier/README.md
 node_modules/prettier/standalone.js
 node_modules/prettier/third-party.js
+
+.vscode
