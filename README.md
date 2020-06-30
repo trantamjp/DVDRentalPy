@@ -4,7 +4,7 @@ Sample Python
 
 ## Demo
 
-<a href="http://35.215.111.93/" target="_blank">http://35.215.111.93/</a>
+<a href="http://tam.letstesla.com/" target="_blank">http://tam.letstesla.com/</a>
 
 ## Preparing database
 
